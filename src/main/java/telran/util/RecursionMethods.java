@@ -28,9 +28,10 @@ public class RecursionMethods {
         return degree == 0 ? 1 : multiply(num, powCalc(num, degree - 1));
     }
 
-    public static long square(int x) {
-        x = abs(x);
-        return x == 0 ? 1 : multiply(x, x);
+    public static int square(int x) {
+        x = x < 0 ? -x : x;
+
+        return  x == 0 ? 0 : x + x - 1 + square(x - 1);
     }
 
 
@@ -51,28 +52,15 @@ public class RecursionMethods {
     }
 
     public static boolean isSubstring(String str, String subStr) {
-        if (subStr.length() > str.length()) {
-            throw new IllegalArgumentException();
-        }
-    
-        return checkSubstring(str, subStr);
+        return subStr.length() <= str.length() &&
+            (startsWith(str, subStr) || isSubstring(str.substring(1), subStr));
     }
 
-    private static boolean checkSubstring(String str, String subStr) {
-        boolean res = startWith(str, subStr);
-
-        if (!res && str.length() > subStr.length()) {
-            res = checkSubstring(str.substring(1), subStr);
-        }
-
-        return res;
-    }
-
-    private static boolean startWith(String str, String subStr) {
+    private static boolean startsWith(String str, String subStr) {
         boolean res = str.charAt(0) == subStr.charAt(0);
         
         if (subStr.length() > 1 && res) {
-            res = startWith(str.substring(1), subStr.substring(1));
+            res = startsWith(str.substring(1), subStr.substring(1));
         }
 
         return res;

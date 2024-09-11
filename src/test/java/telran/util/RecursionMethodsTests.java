@@ -32,9 +32,9 @@ public class RecursionMethodsTests {
 
     @Test
     void squareTest() {
-        assertEquals(100, square(10));
+        assertEquals(16, square(4));
         assertEquals(100, square(-10));
-        assertEquals(1, square(0));
+        assertEquals(0, square(0));
     }
 
     @Test
@@ -51,8 +51,8 @@ public class RecursionMethodsTests {
 
         assertTrue(isSubstring(str, subStr1));
         assertFalse(isSubstring(str, subStr2));
+        assertFalse(isSubstring(subStr2, str));
 
-        assertThrows(IllegalArgumentException.class, () -> isSubstring(subStr1, str));
         assertThrows(NullPointerException.class, () -> isSubstring(null, str));
         assertThrows(NullPointerException.class, () -> isSubstring(subStr1, null));
     }
